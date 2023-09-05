@@ -1,0 +1,63 @@
+<div class="p-4 md:p-8">
+    {{#if toastMessage}}
+    <p class="bg-blue-100 text-blue-700 py-2 px-4 rounded-md mb-4">{{toastMessage}}</p>
+    {{/if}}
+
+    <form action="/editblog" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <input type="hidden" name="articleId" value="{{article.id}}">
+
+        <label class="block text-gray-700">Blog title</label>
+        <input type="text" name="articleTitle" required {{#if article.title}}value="{{article.title}}" {{/if}}
+            class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+
+        <div>
+            <p class="text-gray-700">Current article photo: {{article.articlePhoto}}</p>
+            <img src="/images/articles/{{article.articlePhoto}}" alt="{{article.articlePhoto}}"
+                class="w-32 h-32 object-cover rounded-md mt-2">
+        </div>
+
+        <div>
+            <label for="imgFile" class="block text-gray-700">Upload new image</label>
+            <input id="imgFile" type="file" name="articlePhoto" accept=".png,.jpg,.jpeg,.bmp"
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+            <input type="hidden" name="articlePhoto" id="articlePhoto" value="{{article.articlePhoto}}">
+
+        </div>
+
+        <label class="block text-gray-700">Select a plant category</label>
+        <select name="plantId" required
+            class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+            <optgroup label="Summer">
+                <option value="1" {{#ifEq article.plantId 1}} selected{{/ifEq}}>Tomato</option>
+                <option value="2" {{#ifEq article.plantId 2}} selected{{/ifEq}}>Sunflower</option>
+                <option value="3" {{#ifEq article.plantId 3}} selected{{/ifEq}}>Corn</option>
+                <option value="4" {{#ifEq article.plantId 4}} selected{{/ifEq}}>Pepper</option>
+            </optgroup>
+            <optgroup label="Autumn">
+                <option value="5" {{#ifEq article.plantId 5}} selected{{/ifEq}}>Pumpkin</option>
+                <option value="6" {{#ifEq article.plantId 6}} selected{{/ifEq}}>Radish</option>
+                <option value="7" {{#ifEq article.plantId 7}} selected{{/ifEq}}>Broccoli</option>
+                <option value="8" {{#ifEq article.plantId 8}} selected{{/ifEq}}>Pea</option>
+            </optgroup>
+            <optgroup label="Winter">
+                <option value="9" {{#ifEq article.plantId 9}} selected{{/ifEq}}>Broad Bean</option>
+                <option value="10" {{#ifEq article.plantId 10}} selected{{/ifEq}}>Taro</option>
+                <option value="11" {{#ifEq article.plantId 11}} selected{{/ifEq}}>Kale</option>
+                <option value="12" {{#ifEq article.plantId 12}} selected{{/ifEq}}>Carrot</option>
+            </optgroup>
+            <optgroup label="Spring">
+                <option value="13" {{#ifEq article.plantId 13}} selected{{/ifEq}}>Asparagus</option>
+                <option value="14" {{#ifEq article.plantId 14}} selected{{/ifEq}}>Spring Onion</option>
+                <option value="15" {{#ifEq article.plantId 15}} selected{{/ifEq}}>Kumara</option>
+                <option value="16" {{#ifEq article.plantId 16}} selected{{/ifEq}}>Potato</option>
+            </optgroup>
+        </select>
+
+        <label class="block text-gray-700">Content</label>
+        <textarea name="content" id="content"
+            class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">{{#if article.content}}{{article.content}}{{/if}}</textarea>
+
+        <button type="submit"
+            class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Submit</button>
+    </form>
+</div>

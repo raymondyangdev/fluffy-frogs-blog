@@ -1,0 +1,26 @@
+<div class="bg-indigo-700 py-12">
+  <div class="container mx-auto text-center">
+    <h1 class="text-4xl font-semibold text-white mb-4">Welcome to Our Blog</h1>
+    <p class="text-lg text-gray-300 mb-8">Explore the latest articles and stay updated with our blog.</p>
+    <a href="/search?search="
+      class="bg-white text-indigo-700 hover:bg-indigo-800 text-lg font-semibold py-2 px-6 rounded-full inline-block transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md">View
+      Articles</a>
+  </div>
+</div>
+
+<div class="p-4 md:p-8">
+  <h1 class="text-2xl font-semibold mb-4">Latest Articles</h1>
+
+  {{#each allArticles}}
+  <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 mb-4">
+    <div class="flex items-center space-x-4">
+      <img src="/images/articles/{{this.articlePhoto}}" alt="{{this.articlePhoto}} photo"
+        class="w-16 h-16 rounded-md shadow-md">
+      <div class="flex-grow">
+        <a href="/articles/{{this.id}}" class="text-blue-500 hover:underline text-lg">{{this.title}}</a>
+        <p class="text-gray-600">Last updated: {{this.timeOfPost}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>

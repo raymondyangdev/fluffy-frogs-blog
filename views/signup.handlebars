@@ -1,0 +1,86 @@
+{{! Display a toast message if one was provided. }}
+{{#if toastMessage}}
+<p class="bg-blue-100 text-blue-700 py-2 px-4 rounded-md mb-4">{{toastMessage}}</p>
+{{/if}}
+
+<div class="bg-white p-4 md:p-8 rounded-lg shadow-lg">
+    <form action='./signup' method='POST' class="space-y-4">
+        <div>
+            <h1 class="text-2xl font-semibold">Register</h1>
+            <p class="text-gray-600">Please fill in this form to create an account.</p>
+
+            <label for="fullName" class="text-gray-600">Full Name</label>
+            <input type="text" placeholder="Enter full name" name="name" size="30" required {{#if
+                user.name}}value="{{user.name}}" {{/if}}
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+
+            <label for="userName" class="text-gray-600">Username<span id="displayError"
+                    class="text-red-500"></span></label>
+            <input type="text" placeholder="Choose a unique username" name="username" id="userName" size="30" required
+                {{#if user.username}}value="{{user.username}}" {{/if}}
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+
+            <label for="dob" class="text-gray-600">Date of birth</label>
+            <input type="date" placeholder="Enter date of birth" name="dob" size="30" required {{#if
+                user.dob}}value="{{user.dob}}" {{/if}}
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+
+            <label for="psw" class="text-gray-600"><b>Password</b></label>
+            <input type="password" placeholder="Enter password" name="password" id="psw" size="30" required
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+
+            <label for="psw-repeat" class="text-gray-600"><b>Repeat Password<span id="passwordError"
+                        class="text-red-500"></span></b></label>
+            <input type="password" placeholder="Repeat password" name="repeatPassword" id="psw-repeat" size="30"
+                required class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">
+
+            <label for="txtAbout" class="text-gray-600">A bit about me</label>
+            <textarea placeholder="Tell us a bit about yourself!" name="aboutMe" rows="5" cols="50" required
+                class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300">{{#if user.aboutMe}}{{user.aboutMe}}{{/if}}</textarea>
+
+            <label for="avatar" class="text-gray-600"><b>Choose your avatar!</b></label>
+            <div class="gap-4 flex items-center">
+                <label>
+                    <input type="radio" value="1" name="avatarId" checked />
+                    <img src="./images/avatars/1.png" alt="Default Fluffy Frog Avatar #1" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="2" name="avatarId" {{#ifEq user.avatarId 2}} checked{{/ifEq}} />
+                    <img src="./images/avatars/2.png" alt="Default Fluffy Frog Avatar #2" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="3" name="avatarId" {{#ifEq user.avatarId 3}} checked{{/ifEq}} />
+                    <img src="./images/avatars/3.png" alt="Default Fluffy Frog Avatar #3" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="4" name="avatarId" {{#ifEq user.avatarId 4}} checked{{/ifEq}} />
+                    <img src="./images/avatars/4.png" alt="Default Fluffy Frog Avatar #4" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="5" name="avatarId" {{#ifEq user.avatarId 5}} checked{{/ifEq}} />
+                    <img src="./images/avatars/5.png" alt="Default Fluffy Frog Avatar #5" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="6" name="avatarId" {{#ifEq user.avatarId 6}} checked{{/ifEq}} />
+                    <img src="./images/avatars/6.png" alt="Default Fluffy Frog Avatar #6" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="7" name="avatarId" {{#ifEq user.avatarId 7}} checked{{/ifEq}} />
+                    <img src="./images/avatars/7.png" alt="Default Fluffy Frog Avatar #7" class="h-20 w-20" />
+                </label>
+                <label>
+                    <input type="radio" value="8" name="avatarId" {{#ifEq user.avatarId 8}} checked{{/ifEq}} />
+                    <img src="./images/avatars/8.png" alt="Default Fluffy Frog Avatar #8" class="h-20 w-20" />
+                </label>
+            </div>
+        </div>
+
+        <button type="submit"
+            class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Register</button>
+    </form>
+
+    <div class="mt-4">
+        <p class="text-gray-600">Already have an account? <a href="./login" class="text-blue-500 hover:underline">Sign
+                in</a>.</p>
+    </div>
+</div>

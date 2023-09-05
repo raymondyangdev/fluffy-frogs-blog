@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="/script/client.js"></script>
+
+    {{#if title}}
+    <title class="primary-header">{{title}}</title>
+
+    {{else}}
+
+    <title class="primary-header">~Fluffy Frogs~</title>
+
+    {{/if}}
+
+    <script type="application/javascript" src="/tinymce/tinymce.min.js"></script>
+    <!-- Script element sourcing the TinyMCE configuration -->
+    <script type="application/javascript" src="/script/tiny.js"></script>
+
+    <!-- Weather Script -->
+    <script src="/script/weather.js"></script>
+</head>
+
+<body class="bg-gray-100 flex flex-col h-screen">
+    {{! Navbar }}
+    <nav class="bg-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <ul class="flex space-x-4">
+                <li>
+                    {{#if user}}
+                    <a href="/logout" class="text-indigo-700 hover:text-indigo-900">Logout</a>
+                    {{else}}
+                    <a href="/login" class="text-indigo-700 hover:text-indigo-900">Login</a>
+                    {{/if}}
+                </li>
+                {{#if user}}
+                <li><a href="/admin" class="text-indigo-700 hover:text-indigo-900">Admin</a></li>
+                <li><a href="/contribute" class="text-indigo-700 hover:text-indigo-900">Contribute</a></li>
+                {{/if}}
+                <li><a href="#contact" class="text-indigo-700 hover:text-indigo-900">Contact</a></li>
+                <li><a href="/about" class="text-indigo-700 hover:text-indigo-900">About</a></li>
+            </ul>
+            <form action="/search" method="GET" class="flex items-center space-x-2">
+                <input type="text" placeholder="Search.." name="search"
+                    class="border rounded-md px-2 py-1 focus:outline-none focus:ring focus:ring-indigo-300">
+                <button type="submit"
+                    class="bg-indigo-700 text-white px-3 py-1 rounded-md hover:bg-indigo-900 focus:outline-none focus:ring focus:ring-indigo-300">Submit</button>
+            </form>
+            <div id="result" class="text-indigo-700 hover:text-indigo-900 flex"></div>
+        </div>
+    </nav>
+
+
+    {{! Header/Jumbotron }}
+    <div class="bg-indigo-700 text-white py-16 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-extrabold mb-4">Welcome to Fluffy Frogs</h1>
+            <p class="text-lg text-gray-300">A place where we share our love and knowledge for gardening!</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto mt-8 flex-1">
+        {{{body}}}
+    </div>
+
+    {{! Footer }}
+    <footer class="bg-indigo-700 text-white p-4">
+        <div class="container mx-auto">
+            <ul class="flex justify-center space-x-4">
+                <li><a href="/" class="hover:text-yellow-300">Home</a></li>
+                <li><a href="#news" class="hover:text-yellow-300">News</a></li>
+                <li><a href="#contact" class="hover:text-yellow-300">Contact</a></li>
+                <li><a href="/about" class="hover:text-yellow-300">About</a></li>
+                <li><a href="https://www.facebook.com/" class="hover:text-yellow-300">Facebook</a></li>
+                <li><a href="https://www.instagram.com/" class="hover:text-yellow-300">Instagram</a></li>
+                <li><a href="https://twitter.com/" class="hover:text-yellow-300">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>

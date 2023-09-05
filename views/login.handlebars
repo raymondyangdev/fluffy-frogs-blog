@@ -1,0 +1,27 @@
+<div class="h-full flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full sm:w-96">
+        {{! Display a toast message if one was provided. }}
+        {{#if toastMessage}}
+        <p class="text-red-500 mb-4">{{toastMessage}}</p>
+        {{/if}}
+
+        <form action='./login' method='POST'>
+            <div>
+                <h1 class="text-2xl font-semibold mb-4">Login</h1>
+                <p class="text-gray-600 mb-4">New to Fluffy Frogs? <a href='./signup'
+                        class="text-blue-500 hover:underline">Sign up now!</a></p>
+
+                <label for='txtUsername' class="block text-gray-700">Username</label>
+                <input type='text' name='username' required
+                    class="w-full border rounded-md px-3 py-2 mb-2 focus:outline-none focus:ring focus:ring-indigo-300" />
+
+                <label for='txtPassword' class="block text-gray-700">Password</label>
+                <input type='password' name='password' required
+                    class="w-full border rounded-md px-3 py-2 mb-4 focus:outline-none focus:ring focus:ring-indigo-300" />
+
+                <button type="submit"
+                    class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

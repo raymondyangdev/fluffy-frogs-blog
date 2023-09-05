@@ -1,0 +1,118 @@
+<div class="p-4 md:p-8">
+    <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+        <h1 class="text-2xl font-semibold mb-2">Your Account</h1>
+        <h2 class="text-gray-600">Welcome back, {{user.name}}!</h2>
+
+        <div class="mt-4">
+            <img src="./images/avatars/{{user.avatarId}}.png" alt="Default Fluffy Frog Avatar #{{user.avatarId}}"
+                class="w-16 h-16 rounded-full shadow-md">
+        </div>
+
+        <p class="mt-4 text-gray-600">You can update your details, or make a new post here! Scroll down to view your
+            current posts.</p>
+        <hr class="my-4 border-gray-300">
+
+        <h2 class="text-2xl font-semibold">Edit your details:</h2>
+        <hr class="my-4 border-gray-300">
+
+        {{! Display a toast message if one was provided. }}
+        {{#if toastMessage}}
+        <p class="bg-blue-100 text-blue-700 py-2 px-4 rounded-md mb-4">{{toastMessage}}</p>
+        {{/if}}
+
+        <form action="/admin/edit" method="POST" class="space-y-4">
+            <div class="space-y-2">
+                <label for="fullName" class="text-gray-600">Full Name</label>
+                <input type="text" placeholder="Enter full name" name="name" size="30" required {{#if
+                    user.name}}value="{{user.name}}" {{/if}} class="w-full border rounded-md px-3 py-2">
+
+                <label for="userName" class="text-gray-600">Username</label>
+                <input type="text" placeholder="Choose a unique username" name="username" size="30" required {{#if
+                    user.username}}value="{{user.username}}" {{/if}} readonly
+                    class="w-full border rounded-md px-3 py-2">
+
+                <label for="dob" class="text-gray-600">Date of birth</label>
+                <input type="date" placeholder="Enter date of birth" name="dob" size="30" required {{#if
+                    user.dob}}value="{{user.dob}}" {{/if}} class="w-full border rounded-md px-3 py-2">
+
+                <label for="txtAbout" class="text-gray-600">A bit about me</label>
+                <textarea placeholder="Tell us a bit about yourself!" name="aboutMe" rows="5" cols="50" required
+                    class="w-full border rounded-md px-3 py-2">{{#if user.aboutMe}}{{user.aboutMe}}{{/if}}</textarea>
+
+                <label for="avatar" class="text-gray-600">Choose your avatar</label>
+                <div class="gap-4 flex items-center">
+                    <label>
+                        <input type="radio" value="1" name="avatarId" checked />
+                        <img src="./images/avatars/1.png" alt="Default Fluffy Frog Avatar #1" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="2" name="avatarId" {{#ifEq user.avatarId 2}} checked{{/ifEq}} />
+                        <img src="./images/avatars/2.png" alt="Default Fluffy Frog Avatar #2" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="3" name="avatarId" {{#ifEq user.avatarId 3}} checked{{/ifEq}} />
+                        <img src="./images/avatars/3.png" alt="Default Fluffy Frog Avatar #3" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="4" name="avatarId" {{#ifEq user.avatarId 4}} checked{{/ifEq}} />
+                        <img src="./images/avatars/4.png" alt="Default Fluffy Frog Avatar #4" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="5" name="avatarId" {{#ifEq user.avatarId 5}} checked{{/ifEq}} />
+                        <img src="./images/avatars/5.png" alt="Default Fluffy Frog Avatar #5" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="6" name="avatarId" {{#ifEq user.avatarId 6}} checked{{/ifEq}} />
+                        <img src="./images/avatars/6.png" alt="Default Fluffy Frog Avatar #6" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="7" name="avatarId" {{#ifEq user.avatarId 7}} checked{{/ifEq}} />
+                        <img src="./images/avatars/7.png" alt="Default Fluffy Frog Avatar #7" class="h-20 w-20" />
+                    </label>
+                    <label>
+                        <input type="radio" value="8" name="avatarId" {{#ifEq user.avatarId 8}} checked{{/ifEq}} />
+                        <img src="./images/avatars/8.png" alt="Default Fluffy Frog Avatar #8" class="h-20 w-20" />
+                    </label>
+                </div>
+            </div>
+            <div class="flex justify-between mt-4">
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">Save</button>
+                <a href="./admin/deleteAccount" class="text-red-500 hover:text-red-600">Delete Account</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="my-4">
+        <h2 class="text-2xl font-semibold">Add or edit a post below!</h2>
+        <a href="/contribute" class="inline-block mt-2">
+            <button
+                class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">Add
+                a post</button>
+        </a>
+    </div>
+
+    <hr class="my-8 border-gray-300">
+
+    <div>
+        {{#if articles}}
+        <h2 class="text-2xl font-semibold">See all your current posts here:</h2>
+        <div class="mt-4 space-y-4">
+            {{#each articles}}
+            <div class="bg-white rounded-lg shadow-lg p-4 flex items-center space-x-4">
+                <img src="./images/articles/{{this.articlePhoto}}" alt="{{this.articlePhoto}}"
+                    class="w-16 h-16 rounded-md shadow-md">
+                <div class="flex-grow">
+                    <a href="/articles/{{this.id}}" class="text-blue-500 hover:underline">{{this.title}}</a>
+                    <p class="text-gray-600">{{this.timeOfPost}}</p>
+                </div>
+                <div class="space-x-2">
+                    <a href="/edit/{{this.id}}" class="text-blue-500 hover:underline">Edit</a>
+                    <a href="/articles/{{this.id}}/delete" class="text-red-500 hover:underline">Delete</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</div>

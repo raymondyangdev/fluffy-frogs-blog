@@ -1,0 +1,63 @@
+{{#if toastMessage}}
+<p class="bg-blue-100 text-blue-700 py-2 px-4 rounded-md mb-4">{{toastMessage}}</p>
+{{/if}}
+
+<div class="bg-white p-4 md:p-8 shadow-lg rounded-lg">
+  <div>
+    <div>
+      <h1 class="text-3xl font-semibold mb-2">{{article.title}}</h1>
+      <h3 class="text-gray-600">{{author.name}}</h3>
+      <h5 class="text-gray-400">{{article.timeOfPost}}</h5>
+      <img src="/images/articles/{{article.articlePhoto}}" alt="{{article.articlePhoto}}"
+        class="h-64 w-full object-cover mb-4 rounded-md">
+      <div class="prose max-w-none">{{{article.content}}}</div>
+    </div>
+
+    {{#if user}}
+    <div class="mt-8">
+      <h1 class="text-2xl font-semibold">Leave a comment!</h1>
+      <form action="/postComment" method="POST" class="space-y-4">
+        <input type="hidden" name="articleId" value="{{article.id}}">
+        <textarea placeholder="Tell us your thoughts!" name="comments" rows="5" cols="50" required
+          class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:ring-indigo-300"></textarea>
+        <button type="submit"
+          class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Submit</button>
+      </form>
+    </div>
+    {{else}}
+    <div class="mt-8">
+      <h1 class="text-2xl font-semibold">Leave a comment!</h1>
+      <a href="/login" class="text-blue-500 hover:underline">Sign in</a>
+      <form action="/postComment" method="POST" class="space-y-4">
+        <input type="hidden" name="articleId" value="{{article.id}}">
+        <textarea placeholder="Sign in or register to tell us your thoughts!" name="comments" rows="5" cols="50"
+          readonly class="w-full border rounded-md px-3 py-2"></textarea>
+        <button type="submit" class="bg-gray-300 text-gray-600 px-4 py-2 rounded-md cursor-not-allowed"
+          disabled>Submit</button>
+      </form>
+    </div>
+    {{/if}}
+  </div>
+  <div>
+    <div>
+      {{#if comments}}
+      <h1 class="text-2xl font-semibold mt-8">Latest Comments</h1>
+
+      {{#each comments}}
+      <div class="mt-4 flex space-x-4 items-center">
+        <img src="/images/avatars/{{this.avatarId}}.png" alt="Commenter's Avatar" class="w-12 h-12 rounded-full">
+        <div>
+          <p class="text-black font-bold text-xl">{{this.name}}</p>
+          <p class="italic text-gray-600">{{this.timeOfComment}}</p>
+          <p>"{{{this.content}}}"</p>
+          {{#ifEq this.author @root.user.id}}
+          <a href="/comment/edit/{{this.id}}" class="text-blue-500 hover:underline">Edit</a>
+          <a href="/comment/{{this.id}}/delete" class="text-red-500 hover:underline">Delete</a>
+          {{/ifEq}}
+        </div>
+      </div>
+      {{/each}}
+      {{/if}}
+    </div>
+  </div>
+</div>
